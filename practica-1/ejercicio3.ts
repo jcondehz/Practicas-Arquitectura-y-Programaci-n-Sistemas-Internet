@@ -6,6 +6,7 @@ async function obtenerTitulosDePosts(): Promise<string[]> {
     }
     const posts: {title:string}[]= await respuesta.json()
     const titulos = posts.map(post=>post.title)
+    return titulos;
     }catch(error){
         console.error("error")
         throw error;
