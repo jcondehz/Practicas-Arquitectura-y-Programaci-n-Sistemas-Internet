@@ -2,38 +2,22 @@ import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { connectMongo, getDb } from "../mongo";
 import bcrypt from "bcryptjs";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import { User } from "../types";
 
 const router = Router();
 
 const secret = process.env.SECRET;
 
-type User = {
-    _id: ObjectId;
-    username: String;
-    email: String;
-    passwordHash: String;
-    createdAt: Date;
-};
+type JwtPayload = {
+    id: string;
+    email: string;
+}
 
-type Product = {
-    _id: ObjectId;
-    name: String;
-    description: String;
-    price: Number;
-    stock: Number;
-    createdAt: Date;
-};
-
-type Cart = {
-    _id: ObjectId;
-    userId: ObjectId;
-    items: String[];
-};
 
 const coleccion = () => getDb().collection("UsersPractica3");
 
-router.post("/auth/register", async (req, res) => {
+router.post("/register", async (req, res) => {
     try {
         const { username, email, password } = req.body as {
             username: string;
@@ -65,7 +49,7 @@ router.post("/auth/register", async (req, res) => {
     }
 });
 
-router.post("/auth/login", async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body as {
             email: string;
