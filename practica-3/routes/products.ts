@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { ObjectId } from "mongodb";
 import { connectMongo, getDb } from "../mongo";
-import { Cart, Product } from "../types";
+import { Product } from "../types";
 import { AuthRequest, verifyToken } from "../middleware/verifyToken";
 
 const routerProductos = Router();
