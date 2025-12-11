@@ -68,8 +68,8 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({ message: "Password invalido" });
         }
         const secret = process.env.SECRET;
-        const token = jwt.sign(
-            { id: user._id?.toString(), email: user.email } as JwtPayload,
+        const token = jwt.sign(                                             //tenemos que pasar payload,secret y options
+            { id: user._id?.toString(), email: user.email } as JwtPayload,  //payload lleva el objeto que contiene la información
             secret as string,
             {
                 expiresIn: "1h",
